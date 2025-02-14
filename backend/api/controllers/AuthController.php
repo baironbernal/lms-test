@@ -1,8 +1,6 @@
 <?php
 
 require_once '../models/User.php';
-require_once '../token/Jwt.php';
-
 
 class AuthController
 {
@@ -38,17 +36,35 @@ class AuthController
         $user = $this->user->findByUsername($username);
 
         if ($user && password_verify($password, $user['password'])) {
-            $token = Jwt::encode($user['id']);
+
             return json_encode([
                 "status" => "success",
                 "message" => "Login successful",
                 "user" => $user,
-                "token" => $token
             ]);
         }
         return json_encode([
             "status" => "error",
             "message" => "Invalid username or password"
         ]);
+    }
+
+    public function logOut($token)
+    {
+        $user = $this->user->findByToken($token);
+
+        if (!$user) {
+            return json_encode([
+                "status" => "error",
+                "message" => "Not exist user with this token"
+            ]);
+        }
+
+        if ($this->user->removeToken($user['id'])) {
+            return json_encode([
+                "status" => "success",
+                "message" => "Logout completed"
+            ]);
+        }
     }
 }
