@@ -38,7 +38,7 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
             } else {
                 // Handle success (e.g., redirect to login page)
                 alert('Registration successful! Redirecting to login page...');
-                window.location.href = 'http://localhost:8000/login.html';  // Adjust the URL of your login page
+                window.location.href = 'http://localhost:8000/frontend/views/login.html';  // Adjust the URL of your login page
             }
         })
         .catch(error => {

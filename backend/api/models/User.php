@@ -19,18 +19,33 @@ class User
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashed_password);
 
-        if ($stmt->execute()) {
-            $user_id = $this->db->conn->lastInsertId();
+        // Only insert the user into the database, no token needed here
+        return $stmt->execute();
+    }
 
+    // Login function to authenticate the user and generate a JWT token
+    public function login($username, $password)
+    {
+        // Find the user by username
+        $stmt = $this->db->conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // If user exists, verify password
+        if ($user && password_verify($password, $user['password'])) {
+            // Password is correct, generate JWT token
+            $user_id = $user['id'];
             $token = Jwt::encode($user_id);
 
-            $stmt = $this->db->conn->prepare("UPDATE users SET token = :token WHERE id = :id");
-            $stmt->bindParam(':token', $token);
-            $stmt->bindParam(':id', $user_id);
+            // Store the token in the database
+            $this->storeToken($user_id, $token);
 
-            return $stmt->execute();
+            // Return the token to the user
+            return $token;
         }
 
+        // Invalid credentials
         return false;
     }
 
