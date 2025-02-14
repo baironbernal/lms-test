@@ -1,5 +1,4 @@
 function logout() {
-    // Retrieve the token from localStorage
     const token = localStorage.getItem('authToken');
     
     if (!token) {
@@ -7,19 +6,17 @@ function logout() {
         return;
     }
 
-    // Prepare the payload with the action and token
     const payload = {
         action: 'logout',
         token: token
     };
 
-    // Perform the fetch request
     fetch('http://localhost:8000/backend/api/public/logout', {
-        method: 'POST',  // Assuming POST is the method used for logout
+        method: 'POST',  
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)  // Send the payload as JSON
+        body: JSON.stringify(payload) 
     })
     .then(response => {
         if (!response.ok) {
@@ -30,11 +27,9 @@ function logout() {
     .then(data => {
         console.log('Logged out successfully:', data);
         
-        // Remove the token from localStorage
         localStorage.removeItem('authToken');
 
-        // Redirect to login page
-        window.location.href = 'http://localhost:8000/frontend/views/login.html';  // Redirect to login page
+        window.location.href = 'http://localhost:8000/frontend/views/login.html'; 
 
     })
     .catch(error => {

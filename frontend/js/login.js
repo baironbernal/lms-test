@@ -1,5 +1,5 @@
 document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();  // Prevent form from submitting normally
+    e.preventDefault();  
 
     // Clear previous error messages
     document.getElementById('errorMessages').innerHTML = '';
@@ -13,7 +13,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         return;
     }
 
-    // Create the payload
     const data = {
         action: 'login',
         username: username,
