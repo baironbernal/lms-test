@@ -19,7 +19,7 @@
 
 
 CREATE TABLE `courses` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `course_id` int NOT NULL AUTO_INCREMENT,
   `course_name` varchar(255) DEFAULT NULL,
   `course_description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -38,11 +38,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `token`) VALUES
 (1, 'baironbg', 'baironbernal263@gmail.com', '$2y$12$SUd9sIbe2kbYR74VLx4IxeY2UXnjKJHVyjRP25ri6rUx41dVRdg6e', NULL),
-(3, 'bairiton', 'bbernal@qargocoffee.com', '$2y$12$r9tH/nCPJk2RCwJ.eNxas.0JB6iBao7.mSRqgvGOHi9f4dbrYhrPu', NULL),
-(4, 'testuser', 'testuser@example.com', '$2y$12$dReZK3Q1yugk9iJfNdxPWOxkes1nkosWrNFVrIOdY04i8esiMEoZa', NULL),
-(5, 'bababa', 'testuser22@example.com', '$2y$12$5ayMLzWEDY19XH/m9D4KJ.Bqc1EJoeEqYpAgkvZAHPs/MaKG/qGP.', NULL),
-(6, 'ultras', 'ultras@example.com', '$2y$12$UpiwqvlW56/xGG5UF0Mkz.XWHVJY6YhKN1a8Dafrbd6gydZvO0Lha', NULL),
-(7, 'test', 'test@example.com', '$2y$12$aL4ulafurEAVTo7IsKpjAe44JJ6kx7Io4Cy7YHXuMdoawbxh0.Y3S', NULL);
 
 
 
